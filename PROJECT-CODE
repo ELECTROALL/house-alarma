@@ -1,0 +1,28 @@
+# define in1 2
+# define in2 3
+# define alarm 4
+
+
+void setup() {
+Serial.begin(9600);
+  pinMode(in1, INPUT);
+  pinMode(in2, INPUT);
+  pinMode(alarm, OUTPUT);
+  digitalWrite(alarm, 0);
+}
+void loop() {
+  int estado;
+  if (digitalRead(in1)== 1) {
+    digitalWrite(alarm, 1);
+    estado=0;
+  }
+  if (Serial.available() > 0) {
+    estado = Serial.read();
+  }
+  switch (estado) {
+    case 'A': digitalWrite (alarm, 1);
+      break;
+    case 'B': digitalWrite (alarm, 0);
+    break;
+  }
+}
